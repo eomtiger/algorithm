@@ -1,29 +1,35 @@
 from collections import deque
-def comb(arr, start, link):
-    global total
-    # print(total)
-    if len(start) == N//2:
-        link.extend(arr)
-        arr.clear()
-        print(start, link)
 
-        total = min(total, abs(sum(start)-sum(link)))
+def cal(li,temp): #temp = [0]
+    if len(temp) == 3:
+        temp = temp[1:]
+        print(temp)
         return
+    for i in range(len(temp), len(start)):
+        temp.append(li[i])
+        cal(li, temp)
+        temp.pop()
 
-    elif len(link) == N//2:
-        start.extend(arr)
-        arr.clear()
-        total = min(total, abs(sum(start)-sum(link)))
-        return
 
-    if arr:
-        temp = arr.popleft()
-    else: return
-    start.append(temp)
-    comb(arr, start, link)
-    start.pop()
-    link.append(temp)
-    comb(arr, start, link)
+def comb(arr, start):
+   if len(start) == N//2+1:
+       start=start[1:]
+       link = []
+       for i in arr:
+           if i not in start:
+               link.append(i)
+    #    print(start)
+    #    print(link)
+    #    print('--------------------')
+       
+       cal(start, [0])
+       cal(link,[0])
+       return
+       
+   for i in range(start[-1], N): #start 중 제일 큰 수보다 1 더 큰 수부터 시작
+       start.append(arr[i])
+       comb(arr, start)
+       start.pop()
 
 
 
@@ -36,13 +42,12 @@ arr = deque([])
 for i in range(1, N+1):
     arr.append(i)
 
-start = []
-link = []
+start = [0]
+
 total = 9987654321
 
 # print(len(start))
 
-comb(arr, start, link)
+comb(arr, start)
 
-print(total)
 
