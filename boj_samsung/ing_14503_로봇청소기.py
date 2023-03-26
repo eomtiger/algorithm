@@ -1,6 +1,8 @@
 def move(r, c, d, mat):
+    global cnt 
     if mat[r][c] == 0:          #1번 아직 청소가 안됐으면 청소
         mat[r][c] = 2
+        cnt += 1
 
     flag = False                #다음에 갈 곳이 없다고 가정 처음엔
     for i in range(4):
@@ -16,14 +18,16 @@ def move(r, c, d, mat):
             return
 
     elif flag:  # 갈 곳이 있다면
-        d = (d+3)%4 #반시계로 90도 회전
-        if 0 <= r+dy[d] < N and 0 <= c+dx[d] < M: #다음이 영역 안에 잇고
-            if mat[r+dy[d]][c+dx[d]] == 0:  # 청소안된곳이라면
-                move(r+dy[d], c+dx[d], d, mat )   # 다음으로 가자
-
-
-
-
+        stop = False
+        while not stop:
+            d = (d+3)%4 #반시계로 90도 회전
+            if 0 <= r+dy[d] < N and 0 <= c+dx[d] < M: #다음이 영역 안에 잇고
+                if mat[r+dy[d]][c+dx[d]] == 0:  # 청소안된곳이라면
+                    stop =True
+                    move(r+dy[d], c+dx[d], d, mat )   # 다음으로 가자
+                
+                if stop:
+                    break
 
 
 
@@ -36,7 +40,8 @@ mat = [list(map(int, input().split())) for _ in range(N)]
 dy = [-1,0,1,0] #북동남서
 dx = [0,1,0,-1] #0123
 
+cnt = 0
 
-# move(r, c, mat)
+move(r, c, d, mat)
 
-print(mat)
+print(cnt)
