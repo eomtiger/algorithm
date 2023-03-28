@@ -20,12 +20,15 @@ li = [list(map(int, input().split())) for _ in range(K)]
 print(li)
 
 for i in li:
-
-    for j in range(i[0]-1, 4):
+    d = i[1]   #방향
+    flag = True #for문 돌다가 멈추기
+    for j in range(i[0]-1, 3):
         # print(j)
         pass
 
-    for j in range(i[0]-1, -1, -1):
+
+
+    for j in range(i[0]-1, 0, -1):
         print(j)
 
 
