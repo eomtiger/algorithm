@@ -1,35 +1,105 @@
 from collections import deque
 
-mat = [list(input()) for _ in range(4)]
+mat = [deque(list(input())) for _ in range(4)]
 
 for i in range(4):
     for j in range(8):
         mat[i][j] = int(mat[i][j])
 
-t1 = deque(mat[0])
-t2 = deque(mat[1])
-t3 = deque(mat[2])
-t4 = deque(mat[3])
+print(mat)
 
 
 K = int(input())
 
 li = [list(map(int, input().split())) for _ in range(K)]
 
+for s in li:
+    if s[0] == 1:
+        #오른쪽 방향
+        d = s[1]*1
+        for i in range(s[0]-1, 3):
+            if mat[i][2] != mat[i+1][6]: #1번 자석과 2번 자석 극이 다르면
+                if d == 1: # 시계방향
+                    a = mat[i].pop() #제일 뒤를 뽑아서
+                    mat[i].appendleft(a) #맨앞으로
+                    d = d*-1
+                elif d == -1: #반시계방향
+                    a = mat[i].popleft() #제일 앞을 뽑아서
+                    mat[i].append(a)    #맨 뒤로
+                    d = d*-1
 
-print(li)
+                if mat[i+1] == 3: #마지막 톱니
+                    d = d*-1
+                    if d == 1: # 시계방향
+                        a = mat[i+1].pop() #제일 뒤를 뽑아서
+                        mat[i+1].appendleft(a) #맨앞으로
+                    elif d == -1: #반시계방향
+                        a = mat[i+1].popleft() #제일 앞을 뽑아서
+                        mat[i+1].append(a)    #맨 뒤로
+            
+            else:
+                if d == 1: # 시계방향
+                    a = mat[i].pop() #제일 뒤를 뽑아서
+                    mat[i].appendleft(a) #맨앞으로
+                    break
+                elif d == -1: #반시계방향
+                    a = mat[i].popleft() #제일 앞을 뽑아서
+                    mat[i].append(a)    #맨 뒤로
+                    break
+                
 
-for i in li:
-    d = i[1]   #방향
-    flag = True #for문 돌다가 멈추기
-    for j in range(i[0]-1, 3):
-        # print(j)
-        pass
+
+            
+
+    elif s[0] == 2:
+        d = s[1]*1
+        #오른쪽 방향
+        for i in range(s[0]-1, 3):
+            if mat[i][2] != mat[i+1][6]: #2번 자석과 3번 자석 극이 다르면
+                if d == 1: # 시계방향
+                    a = mat[i].pop() #제일 뒤를 뽑아서
+                    mat[i].appendleft(a) #맨앞으로
+                    d = d*-1
+                elif d == -1: #반시계방향
+                    a = mat[i].popleft() #제일 앞을 뽑아서
+                    mat[i].append(a)    #맨 뒤로
+                    d = d*-1
+
+                if mat[i+1] == 3: #마지막 톱니
+                    d = d*-1
+                    if d == 1: # 시계방향
+                        a = mat[i+1].pop() #제일 뒤를 뽑아서
+                        mat[i+1].appendleft(a) #맨앞으로
+                    elif d == -1: #반시계방향
+                        a = mat[i+1].popleft() #제일 앞을 뽑아서
+                        mat[i+1].append(a)    #맨 뒤로
+            
+            else:
+                if d == 1: # 시계방향
+                    a = mat[i].pop() #제일 뒤를 뽑아서
+                    mat[i].appendleft(a) #맨앞으로
+                    break
+                elif d == -1: #반시계방향
+                    a = mat[i].popleft() #제일 앞을 뽑아서
+                    mat[i].append(a)    #맨 뒤로
+                    break
+
+        #왼쪽 방향
+        if mat[1][6] != mat[0][2]:
+            if d == 1:
+                
 
 
 
-    for j in range(i[0]-1, 0, -1):
-        print(j)
+    elif s[0] == 3:
+
+    elif s[0] == 4: 
+
+
+
+# print(li)
+
+
 
 
 
