@@ -59,7 +59,7 @@ def moveright(start, direction):
 
 
 for l in li:
-    print(l)
+    # print(l)
     moveleft(l[0], l[1])
     moveright(l[0], l[1])
     if l[1] == -1:
